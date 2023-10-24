@@ -1,11 +1,38 @@
 const express = require('express');
+const session = require('express-session');
+const dotenv = require('dotenv');
 const fs = require('fs');
 const path = require('path');
 const router = express.Router();
 const csv = require('csv-parser');
+const mongoose = require("mongoose");
+const Passenger = require('./models/passengerModel.js');
+
+dotenv.config();
+const { APP_HOSTNAME, APP_PORT, NODE_ENV, MONGODB_URI, SECRET_KEY } = process.env;
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+
+app.use(express.urlencoded({ extended: true }));
+app.use(
+  session({
+    secret: SECRET_KEY,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+app.locals.pretty = NODE_ENV !== "production";
+
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  console.log("Connexion à MongoDB réussie");
+})
+.catch((error) => {
+  console.error("Erreur de connexion à MongoDB :", error);
+});
 
 // Middleware pour analyser les données CSV
 const data = [];
@@ -25,9 +52,6 @@ app.get('/', (req, res) => {
 
 // Route pour afficher les statistiques des survivants
 app.get('/statistics', (req, res) => {
-  // Code pour calculer les statistiques en fonction des critères demandés (sexe, âge, classe)
-  // Exemple : Vous pouvez utiliser la méthode `filter` pour filtrer les survivants en fonction de différents critères.
-
   // Exemple : Filtrer les survivants en fonction de la classe
   const survivorsByClass = {
     firstClass: data.filter((passenger) => passenger.Pclass === '1' && passenger.Survived === '1').length,
@@ -57,6 +81,6 @@ app.get('/statistics', (req, res) => {
   res.json(statistics);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(APP_PORT, () => {
+  console.log(`App listening at http://${APP_HOSTNAME}:${APP_PORT}`);
 });
