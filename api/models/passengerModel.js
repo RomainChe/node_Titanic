@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Passenger = require('./models/passengerModel.js');
 
 const passengerSchema = new mongoose.Schema({
   Pclass: String,
