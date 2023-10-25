@@ -25,9 +25,9 @@ const Statistics = () => {
     <div>
       <div>
         {searchResults ? (
-          <Results results={searchResults} onReset={handleReset} />
+          <Results results={searchResults} onReset={handleReset} filters={filters}/>
         ) : (
-          <Search onSearch={handleSearch} />
+          <Search onSearch={handleSearch} setFilters={setFilters} filters={filters} />
         )}
       </div>
     </div>

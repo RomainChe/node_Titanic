@@ -1,8 +1,57 @@
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
-const Results = ({ results, onReset }) => {
+const Results = ({ results, onReset, filters }) => {
   const chartRef = useRef();
+
+  useEffect(() => {
+    const margin = { top: 20, right: 30, bottom: 40, left: 40 };
+    const width = 200 - margin.left - margin.right;
+    const height = 300 - margin.top - margin.bottom;
+  
+    const svg = d3
+      .select(chartRef.current)
+      .append('svg')
+      .attr('width', width + margin.left + margin.right)
+      .attr('height', height + margin.top + margin.bottom)
+      .append('g')
+      .attr('transform', `translate(${margin.left},${margin.top})`);
+  
+    const data = results;
+  
+    const filterData = data.filter((d) => {
+      if (filters.gender && d.Sex !== filters.gender) return false;
+      if (filters.age && (d.Age < filters.age || d.Age >= (filters.age))) return false;
+      if (filters.class && d.Pclass !== parseInt(filters.class)) return false;
+      return true;
+    });
+  
+    const groupSurvivor = (data) => {
+      return filterData.reduce((count, d) => count + d.Survived, 0);
+    };
+  
+    const survivorsCount = groupSurvivor(filterData);
+  
+    svg
+      .append('rect')
+      .attr('x', 0)
+      .attr('y', height - survivorsCount)
+      .attr('width', width)
+      .attr('height', survivorsCount)
+      .attr('fill', 'steelblue');
+  
+    svg
+      .append('text')
+      .attr('x', width / 2)
+      .attr('y', height - survivorsCount - 10)
+      .attr('text-anchor', 'middle')
+      .attr('font-weight', 'bold')
+      .text(`Survivants : ${survivorsCount}`);
+  
+    return () => {
+      d3.select(chartRef.current).select('svg').remove();
+    };
+  }, [results, filters]);
 
   useEffect(() => {
     const margin = { top: 20, right: 30, bottom: 40, left: 40 };
@@ -95,7 +144,7 @@ const Results = ({ results, onReset }) => {
       const groupedData = {};
     
       data.forEach((d) => {
-        const age = Math.floor(d.Age / 10) * 10;
+        const age = d.Age;
         if (!groupedData[age]) {
           groupedData[age] = 0;
         }
@@ -131,7 +180,7 @@ const Results = ({ results, onReset }) => {
       .enter()
       .append('text')
       .attr('x', ([key]) => x(key) + x.bandwidth() / 2)
-      .attr('y', ([, value]) => y(value) - 10) // Ajustez la position verticale pour le placer au-dessus de la colonne
+      .attr('y', ([, value]) => y(value) - 10)
       .attr('text-anchor', 'middle')
       .attr('font-weight', 'bold')
       .text(([, value]) => value);  
@@ -219,10 +268,12 @@ const Results = ({ results, onReset }) => {
   }, [results]);
 
   return (
-    <div>
-      <h1>Résultats de la recherche</h1>
+    <div className="container">
+      <h1 className="mt-3">Résultats de la recherche</h1>
       <div ref={chartRef}></div>
-      <button onClick={onReset}>Réinitialiser</button>
+      <div className="d-flex justify-content-center mt-3">
+        <button className="btn btn-primary btn-lg" onClick={onReset}>Réinitialiser</button>
+      </div>
     </div>
   );
 };
