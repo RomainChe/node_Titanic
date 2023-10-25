@@ -9,7 +9,7 @@ appRouter.get('/', (req, res) => {
     res.send('Welcome to the Titanic Passenger Statistics App');
 });
 appRouter.post("/register", registerController.registerUser);
-appRouter.get("/statistics", registerStatistics.getStatistics);
+appRouter.post("/statistics", registerStatistics.getStatistics);
 appRouter.post("/login", loginController.postLoginPage);
 appRouter.post("/logout", loginController.logout);
 

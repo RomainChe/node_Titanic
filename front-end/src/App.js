@@ -5,14 +5,14 @@ import Login from './components/Login';
 import Register from './components/Register.jsx';
 import Home from './components/Home.jsx';
 import Navbar from './components/Navbar';
+import Statistics from "./components/Statistics";
 import './App.css';
 
 function App() {
   const [user, setUser] = useState(null);
 
   const handleLogout = () => {
-    // Code pour gérer la déconnexion
-    setUser(null); // Réinitialisez l'utilisateur
+    setUser(null);
   }
   return (
     <Router>
@@ -20,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login setUser={setUser}/>} />
         <Route path="/register" element={<Register />} />
+        <Route path="/statistics" element={<Statistics />} />
         <Route path="/" element={<Home />} />
       </Routes>
     </Router>

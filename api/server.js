@@ -5,7 +5,6 @@ const fs = require('fs');
 const csv = require('csv-parser');
 const mongoose = require("mongoose");
 const cors = require('cors');
-const path = require('path');
 const routes = require('./routes/routes.js');
 
 dotenv.config();

@@ -1,10 +1,18 @@
 const mongoose = require('mongoose');
-const Passenger = require('./models/passengerModel.js');
 
 const passengerSchema = new mongoose.Schema({
-  Pclass: String,
-  Survived: String,
+  PassengerId: Number,
+  Survived: Number,
+  Pclass: Number,
   Name: String,
+  Sex: String,
+  Age: Number,
+  SibSp: Number,
+  Parch: Number,
+  Ticket: String,
+  Fare: Number,
+  Cabin: String,
+  Embarked: String,
 });
 
 const Passenger = mongoose.model('Passenger', passengerSchema);
