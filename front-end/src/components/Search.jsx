@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
+import { mean, std } from 'mathjs';
 
-const Search = ({ onSearch, setFilters, filters }) => {
-  const [average, setAverage] = useState(0);
-  const [stdDeviation, setStdDeviation] = useState(0);
+const Search = ({ onSearch, setFilters, filters, handleAverageUpdate, handleStdDeviationUpdate }) => {
   const handleSearch = async () => {
     try {
       const response = await axios.post('http://localhost:8000/statistics', filters);
       onSearch(response.data);
+
+      const ageValues = response.data
+      .map((passenger) => passenger.Age)
+      .filter((age) => age != null);
+      const averageAge = mean(ageValues);
+      const stdDeviationAge = std(ageValues);
+
+      handleAverageUpdate(averageAge);
+      handleStdDeviationUpdate(stdDeviationAge);
     } catch (error) {
       console.error('Erreur lors de la recherche :', error);
     }

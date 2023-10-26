@@ -6,6 +6,8 @@ import Results from './Results.jsx';
 const Statistics = () => {
   const [filters, setFilters] = useState({ gender: '', age: '', class: '' });
   const [searchResults, setSearchResults] = useState(null);
+  const [average, setAverage] = useState(0);
+  const [stdDeviation, setStdDeviation] = useState(0);
 
   const handleSearch = async () => {
     try {
@@ -19,15 +21,25 @@ const Statistics = () => {
   const handleReset = () => {
     setSearchResults(null);
     setFilters({ gender: '', age: '', class: '' });
+    setAverage(0);
+    setStdDeviation(0);
+  };
+
+  const handleAverageUpdate = (newAverage) => {
+    setAverage(newAverage);
+  };
+
+  const handleStdDeviationUpdate = (newStdDeviation) => {
+    setStdDeviation(newStdDeviation);
   };
 
   return (
     <div>
       <div>
         {searchResults ? (
-          <Results results={searchResults} onReset={handleReset} filters={filters}/>
+          <Results average={average} stdDeviation={stdDeviation} results={searchResults} onReset={handleReset} filters={filters}/>
         ) : (
-          <Search onSearch={handleSearch} setFilters={setFilters} filters={filters} />
+          <Search onSearch={handleSearch} setFilters={setFilters} filters={filters} handleAverageUpdate={handleAverageUpdate} handleStdDeviationUpdate={handleStdDeviationUpdate} />
         )}
       </div>
     </div>
