@@ -21,36 +21,31 @@ const Navbar = ({ user, onLogout }) => {
     };
   
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <Link to="/" className="navbar-brand">Home</Link>
-        <ul className="navbar-nav ml-auto">
+      <nav class="navbar custom-navbar">
+        <Link to="/" class="navbar-brand custom-navbar-brand">Home</Link>
+        <ul class="navbar-nav ml-auto custom-navbar-nav">
           {isAuthenticated ? (
             <>
-              <li className="nav-item">
-                <Link to="/account" className="nav-link">
-                  Compte
+              <li class="navbar-item">
+                <Link to="/statistics" class="navbar-link custom-navbar-link">
+                  Statistics
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link to="/statistics" className="nav-link">
-                    Statistics
-                </Link>
-              </li>
-              <li className="nav-item">
-                <button className="btn btn-link nav-link" onClick={handleLogout}>
+              <li class="navbar-item">
+                <button class="custom-button navbar-link" onClick={handleLogout}>
                   Logout
                 </button>
               </li>
             </>
           ) : (
             <>
-              <li className="nav-item">
-                <Link to="/login" className="nav-link">
+              <li class="navbar-item">
+                <Link to="/login" class="navbar-link custom-navbar-link">
                   Login
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link to="/register" className="nav-link">
+              <li class="navbar-item">
+                <Link to="/register" class="navbar-link custom-navbar-link">
                   Register
                 </Link>
               </li>

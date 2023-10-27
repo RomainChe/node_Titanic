@@ -42,39 +42,37 @@ const Login = ({ setUser }) => {
   };
 
   return (
-    <div>
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-md-6">
-            <div className="card mt-5">
-              <div className="card-body">
-                <h1 className="card-title">Login</h1>
+    <div class="login-container">
+      <div class="login-container">
+        <div class="login-row justify-content-center">
+          <div class="login-col-md-6">
+            <div class="login-card mt-5">
+              <div class="login-card-body">
+                <h1 class="login-card-title">Login</h1>
                 <form onSubmit={handleSubmit}>
-                  <div className="form-group">
-                    <label htmlFor="email">Email</label>
+                  <div class="login-form-group">
+                    <label for="login-email">Email</label>
                     <input
                       type="email"
-                      className="form-control"
-                      id="email"
+                      class="login-form-control"
+                      id="login-email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="form-group">
-                    <label htmlFor="password">Password</label>
+                  <div class="login-form-group">
+                    <label for="login-password">Password</label>
                     <input
                       type="password"
-                      className="form-control"
-                      id="password"
+                      class="login-form-control"
+                      id="login-password"
                       name="password"
                       value={formData.password}
                       onChange={handleChange}
                     />
                   </div>
-                  <button type="submit" className="btn btn-primary">
-                    Login
-                  </button>
+                  <button type="submit" class="login-button">Login</button>
                 </form>
               </div>
             </div>

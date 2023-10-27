@@ -54,8 +54,11 @@ const Results = ({ average, stdDeviation, results, onReset, filters }) => {
   // }, [results, filters]);
 
   useEffect(() => {
+    const updateChart = () => {
+      d3.select(chartRef.current).selectAll('*').remove();
+    }
     const margin = { top: 20, right: 30, bottom: 40, left: 40 };
-    const width = 400 - margin.left - margin.right;
+    const width = chartRef.current.clientWidth - margin.left - margin.right;
     const height = 300 - margin.top - margin.bottom;
 
     const svg = d3
@@ -268,19 +271,20 @@ const Results = ({ average, stdDeviation, results, onReset, filters }) => {
   }, [results]);
 
   return (
-    <div className="container">
-      <h1 className="mt-3">Résultats de la recherche</h1>
-      <div className="d-flex flex-column align-items-center mt-3">
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">Résultats :</h5>
-            <p className="card-text">Moyenne : {average}</p>
-            <p className="card-text">Écart type : {stdDeviation}</p>
+    <div class="custom-container">
+      <h1 class="custom-heading">Résultats de la recherche</h1>
+      <div class="custom-chart" ref={chartRef}></div>
+      <div class="custom-card-container">
+        <div class="custom-card">
+          <div class="custom-card-body">
+            <h5 class="custom-card-title">Résultats :</h5>
+            <p class="custom-card-text">Moyenne : {average}</p>
+            <p class="custom-card-text">Écart type : {stdDeviation}</p>
           </div>
         </div>
       </div>
-      <div className="d-flex justify-content-center mt-3">
-        <button className="btn btn-primary btn-lg" onClick={onReset}>Réinitialiser</button>
+      <div class="custom-button-container">
+        <button class="custom-button" onClick={onReset}>Réinitialiser</button>
       </div>
     </div>
   );

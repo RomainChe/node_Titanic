@@ -32,9 +32,9 @@ const logout = (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       console.error(err);
-      res.status(500).send("Erreur lors de la déconnexion");
+      res.status(500).json("Erreur lors de la déconnexion");
     } else {
-      res.status(200).send("Déconnexion réussie");
+      res.status(200).json("Déconnexion réussie");
     }
   });
 };

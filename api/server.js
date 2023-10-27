@@ -1,8 +1,6 @@
 const express = require('express');
 const session = require('express-session');
 const dotenv = require('dotenv');
-const fs = require('fs');
-const csv = require('csv-parser');
 const mongoose = require("mongoose");
 const cors = require('cors');
 const routes = require('./routes/routes.js');
@@ -34,16 +32,6 @@ mongoose.connect(`${MONGODB_URI}${MONGO_DB_NAME}`, {
 .catch((error) => {
   console.error("Erreur de connexion à MongoDB :", error);
 });
-
-const data = [];
-fs.createReadStream('train.csv')
-  .pipe(csv())
-  .on('data', (row) => {
-    data.push(row);
-  })
-  .on('end', () => {
-    console.log('CSV file successfully processed.');
-  });
 
 app.listen(APP_PORT, () => {
   console.log(`App listening at http://${APP_HOSTNAME}:${APP_PORT}`);

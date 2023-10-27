@@ -43,61 +43,59 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-md-6">
-            <div className="card mt-5">
-              <div className="card-body">
-                <h1 className="card-title">Register</h1>
+    <div class="register-container">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="card mt-5">
+              <div class="card-body">
+                <h1 class="card-title">Register</h1>
                 <form onSubmit={handleSubmit}>
-                  <div className="form-group">
-                    <label htmlFor="username">Username</label>
+                  <div class="form-group">
+                    <label for="register-username">Username</label>
                     <input
                       type="text"
-                      className="form-control"
-                      id="username"
+                      class="form-control"
+                      id="register-username"
                       name="username"
                       value={formData.username}
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="form-group">
-                    <label htmlFor="password">Password</label>
+                  <div class="form-group">
+                    <label for="register-password">Password</label>
                     <input
                       type="password"
-                      className="form-control"
-                      id="password"
+                      class="form-control"
+                      id="register-password"
                       name="password"
                       value={formData.password}
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="form-group">
-                    <label htmlFor="password_confirm">Confirm Password</label>
+                  <div class="form-group">
+                    <label for="register-password-confirm">Confirm Password</label>
                     <input
                       type="password"
-                      className="form-control"
-                      id="password_confirm"
+                      class="form-control"
+                      id="register-password-confirm"
                       name="password_confirm"
                       value={formData.password_confirm}
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="form-group">
-                    <label htmlFor="email">Email</label>
+                  <div class="form-group">
+                    <label for="register-email">Email</label>
                     <input
                       type="email"
-                      className="form-control"
-                      id="email"
+                      class="form-control"
+                      id="register-email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
                     />
                   </div>
-                  <button type="submit" className="btn btn-primary">
-                    Register
-                  </button>
+                  <button type="submit" class="btn btn-primary">Register</button>
                 </form>
               </div>
             </div>

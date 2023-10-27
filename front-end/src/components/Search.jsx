@@ -22,40 +22,40 @@ const Search = ({ onSearch, setFilters, filters, handleAverageUpdate, handleStdD
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-      <div className="text-center p-4 rounded shadow">
-        <h1 className="mb-4">Recherche des survivants du Titanic</h1>
-        <div className="form-group mb-3">
-          <label htmlFor="gender">Sexe :</label>
+    <div class="search-container">
+      <div class="search-form-container">
+        <h1 class="search-heading">Recherche des survivants du Titanic</h1>
+        <div class="search-form-group">
+          <label for="search-gender">Sexe :</label>
           <input
             type="text"
-            className="form-control"
-            id="gender"
+            class="search-form-control"
+            id="search-gender"
             value={filters.gender}
             onChange={(e) => setFilters({ ...filters, gender: e.target.value })}
           />
         </div>
-        <div className="form-group mb-3">
-          <label htmlFor="age">Âge :</label>
+        <div class="search-form-group">
+          <label for="search-age">Âge :</label>
           <input
             type="text"
-            className="form-control"
-            id="age"
+            class="search-form-control"
+            id="search-age"
             value={filters.age}
             onChange={(e) => setFilters({ ...filters, age: e.target.value })}
           />
         </div>
-        <div className="form-group mb-3">
-          <label htmlFor="class">Classe :</label>
+        <div class="search-form-group">
+          <label for="search-class">Classe :</label>
           <input
             type="text"
-            className="form-control"
-            id="class"
+            class="search-form-control"
+            id="search-class"
             value={filters.class}
             onChange={(e) => setFilters({ ...filters, class: e.target.value })}
           />
         </div>
-        <button onClick={handleSearch} className="btn btn-primary mt-3">Analyser</button>
+        <button onClick={handleSearch} class="search-button">Analyser</button>
       </div>
     </div>
   );
